@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", controller.ShowApiList)
+	http.HandleFunc("/api/", controller.ShowApiList)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
