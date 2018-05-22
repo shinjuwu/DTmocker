@@ -93,24 +93,7 @@ func Login(w *http.ResponseWriter, r *http.Request) error {
 	res.Data.PlayerVersion = 92
 	res.Data.LineBets = "|0|0.01|0.02|0.05"
 	res.Data.Currency = "EUR"
-	// data := map[string]interface{}{
-	// 	"id":            3225815,
-	// 	"bossCode":      "NNTI",
-	// 	"playerPrice":   955,
-	// 	"platformCode":  "NNTI_SUN_LONG8",
-	// 	"playerName":    "TEST0.23345346",
-	// 	"playerStatus":  0,
-	// 	"partitionId":   5,
-	// 	"Encode":        "sdfdgdfyrtuytjtyfgsdgdfgdfg",
-	// 	"agentCode":     "NNTI_SUN",
-	// 	"playerVersion": 92,
-	// 	"lineBets":      "|0|0.01|0.02|0.05",
-	// 	"currency":      "EUR",
-	// }
-	// usi := map[string]interface{}{
-	// 	"result": "00000",
-	// 	"data":   data,
-	// }
+
 	result, err := json.Marshal(res)
 	if err != nil {
 		return err
