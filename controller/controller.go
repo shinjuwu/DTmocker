@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"DTmocker/model"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -36,6 +37,7 @@ func (hd *MethodHandler) register(id string, f Callback) {
 func (hd *MethodHandler) ProcessMethod() error {
 	hd.r.ParseForm()
 	id := ""
+	//fmt.Println(hd.r.Form)
 	for k, v := range hd.r.Form {
 		switch k {
 		case "method":
@@ -58,8 +60,8 @@ func (hd *MethodHandler) ProcessMethod() error {
 }
 
 func ShowApiList(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Api List:")
-	fmt.Fprintln(w, "Api List:")
+	//fmt.Println("Api List:")
+	//fmt.Fprintln(w, "Api List:")
 	hd.w = &w
 	hd.r = r
 	err := hd.ProcessMethod()
@@ -70,36 +72,55 @@ func ShowApiList(w http.ResponseWriter, r *http.Request) {
 
 func LoginByPwd(w *http.ResponseWriter, r *http.Request) error {
 	fmt.Println("Callback: LoginByPwd")
-	fmt.Fprintln(*w, "LoginByPwd")
+	//fmt.Fprintln(*w, "LoginByPwd")
 	return nil
 }
 
 func Login(w *http.ResponseWriter, r *http.Request) error {
-	fmt.Println("Callback: login")
-	fmt.Fprintln(*w, "login")
-	data := map[string]interface{}{
-		"id":            3225815,
-		"bossCode":      "NNTI",
-		"playerPrice":   955,
-		"platformCode":  "NNTI_SUN_LONG8",
-		"playerName":    "TEST0.23345346",
-		"playerStatus":  0,
-		"partitionId":   5,
-		"Encode":        "sdfdgdfyrtuytjtyfgsdgdfgdfg",
-		"agentCode":     "NNTI_SUN",
-		"playerVersion": 92,
-		"lineBets":      "|0|0.01|0.02|0.05",
-		"currency":      "EUR",
+	//fmt.Println("Callback: login")
+
+	var res model.Response
+	res.Result = "00000"
+	res.Data.ID = 345345
+	res.Data.BossCode = "NNTI"
+	res.Data.PlayerPrice = 955
+	res.Data.PlatformCode = "NNTI_SUN_LONG8"
+	res.Data.PlayerName = "TEST0.23345346"
+	res.Data.PlayerStatus = 0
+	res.Data.PartitionID = 5
+	res.Data.Encode = "sdfsdgdfg"
+	res.Data.AgentCode = "NNTI_SUN"
+	res.Data.PlayerVersion = 92
+	res.Data.LineBets = "|0|0.01|0.02|0.05"
+	res.Data.Currency = "EUR"
+	// data := map[string]interface{}{
+	// 	"id":            3225815,
+	// 	"bossCode":      "NNTI",
+	// 	"playerPrice":   955,
+	// 	"platformCode":  "NNTI_SUN_LONG8",
+	// 	"playerName":    "TEST0.23345346",
+	// 	"playerStatus":  0,
+	// 	"partitionId":   5,
+	// 	"Encode":        "sdfdgdfyrtuytjtyfgsdgdfgdfg",
+	// 	"agentCode":     "NNTI_SUN",
+	// 	"playerVersion": 92,
+	// 	"lineBets":      "|0|0.01|0.02|0.05",
+	// 	"currency":      "EUR",
+	// }
+	// usi := map[string]interface{}{
+	// 	"result": "00000",
+	// 	"data":   data,
+	// }
+	result, err := json.Marshal(res)
+	if err != nil {
+		return err
 	}
-	usi := map[string]interface{}{
-		"result": "00000",
-		"data":   data,
-	}
-	result, err := json.Marshal(usi)
+	resp := model.Response{}
+	err = json.Unmarshal(result, &resp)
 	if err != nil {
 		return err
 	}
 	fmt.Printf("%s", result)
-	fmt.Fprintln(*w, result)
+	fmt.Fprintln(*w, string(result))
 	return nil
 }
