@@ -98,11 +98,7 @@ func Login(w *http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
-	resp := model.Response{}
-	err = json.Unmarshal(result, &resp)
-	if err != nil {
-		return err
-	}
+
 	fmt.Printf("%s", result)
 	fmt.Fprintln(*w, string(result))
 	return nil
