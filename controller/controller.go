@@ -62,6 +62,8 @@ func (hd *MethodHandler) ProcessMethod() error {
 func ShowApiList(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("Api List:")
 	//fmt.Fprintln(w, "Api List:")
+	r.ParseForm()
+	fmt.Println(r)
 	hd.w = &w
 	hd.r = r
 	err := hd.ProcessMethod()
