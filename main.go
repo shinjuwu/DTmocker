@@ -58,6 +58,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 }
 
 func echo(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	fmt.Println(r.Form)
 	var res model.Response
 	res.Result = "00000"
 	res.Data.ID = 345345
@@ -78,6 +80,5 @@ func echo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(string(result))
 	fmt.Fprintln(w, string(result))
 }
